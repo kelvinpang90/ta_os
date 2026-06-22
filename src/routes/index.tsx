@@ -105,7 +105,7 @@ function assetUrl(url: string) {
 function Landing() {
   const [lang, setLang] = useState<Lang>("zh");
   const t = copy[lang];
-  const whatsapp = "https://wa.me/60113765704";
+  const whatsapp = "https://wa.me/601137657049";
   const phoneDisplay = "+60 11-3765 7049";
   const emails = [
     "hr.acc8839@gmail.com",
