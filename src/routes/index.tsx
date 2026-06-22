@@ -106,8 +106,13 @@ function Landing() {
   const [lang, setLang] = useState<Lang>("zh");
   const t = copy[lang];
   const whatsapp = "https://wa.me/60113765704";
-  const phoneDisplay = "+60 11 3765 7049";
-  const email = "hr.acc8839@gmail.com";
+  const phoneDisplay = "+60 11-3765 7049";
+  const emails = [
+    "hr.acc8839@gmail.com",
+    "tna.acc8839@gmail.com",
+    "tna.audit8839@gmail.com",
+    "tna.tax8839@gmail.com",
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -277,7 +282,19 @@ function Landing() {
             </div>
             <div className="space-y-6">
               <ContactRow icon={Phone} label={t.contactPhone} value={phoneDisplay} href={whatsapp} />
-              <ContactRow icon={Mail} label={t.contactEmail} value={email} href={`mailto:${email}`} />
+              <div className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-gold/60 hover:bg-white/[0.06]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-primary-foreground/50">{t.contactEmail}</div>
+                  <div className="mt-1 flex flex-col gap-1.5">
+                    {emails.map((e) => (
+                      <a key={e} href={`mailto:${e}`} className="text-base text-primary-foreground transition hover:text-gold">{e}</a>
+                    ))}
+                  </div>
+                </div>
+              </div>
               <ContactRow icon={MapPin} label={t.contactLocation} value="Malaysia & Singapore · Johor Bahru" />
             </div>
           </div>
