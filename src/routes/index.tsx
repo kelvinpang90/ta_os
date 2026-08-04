@@ -17,9 +17,13 @@ export const Route = createFileRoute("/")({
 
 type Lang = "zh" | "en";
 
+const partners = [
+  { name: "Acuven Technology Sdn Bhd", url: "https://acuventech.com/" },
+];
+
 const copy = {
   zh: {
-    nav: { services: "服務項目", about: "關於我們", why: "我們的優勢", contact: "聯絡我們" },
+    nav: { services: "服務項目", about: "關於我們", why: "我們的優勢", partners: "合作夥伴", contact: "聯絡我們" },
     cta: "免費諮詢",
     heroEyebrow: "馬來西亞 · 新加坡 · 跨境專業",
     heroTitle: "跨越邊界的會計夥伴",
@@ -49,6 +53,8 @@ const copy = {
     aboutTitle: "您的長期財務夥伴",
     aboutBody1: "T & A Cross-Border Accounting 專注於馬來西亞與新加坡的跨境會計與稅務服務。我們相信，真正的價值來自於對客戶業務的深入理解。",
     aboutBody2: "從初創企業到成熟集團，我們以專業、誠信與遠見，陪伴每一位客戶走過每一個成長階段。",
+    partnersTitle: "值得信賴的合作夥伴",
+    partnersSubtitle: "攜手優秀夥伴，為客戶提供更完整的服務網絡。",
     contactTitle: "開啟對話",
     contactSubtitle: "免費諮詢，了解我們如何協助您的企業跨境成長。",
     contactPhone: "電話 / WhatsApp",
@@ -56,9 +62,10 @@ const copy = {
     contactLocation: "服務地區",
     footerTagline: "Tax · Accounting · Advisory · Compliance",
     footerRights: "保留所有權利。",
+    footerTechBy: "網站技術支持",
   },
   en: {
-    nav: { services: "Services", about: "About", why: "Why Us", contact: "Contact" },
+    nav: { services: "Services", about: "About", why: "Why Us", partners: "Partners", contact: "Contact" },
     cta: "Free Consultation",
     heroEyebrow: "Malaysia · Singapore · Cross-Border Specialists",
     heroTitle: "Accounting Partners Beyond Borders",
@@ -88,6 +95,8 @@ const copy = {
     aboutTitle: "Your Long-Term Financial Partner",
     aboutBody1: "T & A Cross-Border Accounting specializes in cross-border accounting and tax services across Malaysia and Singapore. Real value comes from truly understanding our clients' business.",
     aboutBody2: "From startups to established groups, we walk alongside every client at every stage of growth with professionalism, integrity, and foresight.",
+    partnersTitle: "Trusted Partners",
+    partnersSubtitle: "Working with great partners to give clients an even stronger service network.",
     contactTitle: "Start the Conversation",
     contactSubtitle: "Free consultation to explore how we can support your cross-border growth.",
     contactPhone: "Phone / WhatsApp",
@@ -95,6 +104,7 @@ const copy = {
     contactLocation: "Coverage",
     footerTagline: "Tax · Accounting · Advisory · Compliance",
     footerRights: "All rights reserved.",
+    footerTechBy: "Website by",
   },
 } as const;
 
@@ -130,6 +140,7 @@ function Landing() {
             <a href="#services" className="text-foreground/70 transition hover:text-navy">{t.nav.services}</a>
             <a href="#about" className="text-foreground/70 transition hover:text-navy">{t.nav.about}</a>
             <a href="#why" className="text-foreground/70 transition hover:text-navy">{t.nav.why}</a>
+            <a href="#partners" className="text-foreground/70 transition hover:text-navy">{t.nav.partners}</a>
             <a href="#contact" className="text-foreground/70 transition hover:text-navy">{t.nav.contact}</a>
           </nav>
           <div className="flex items-center gap-3">
@@ -267,6 +278,31 @@ function Landing() {
         </div>
       </section>
 
+      {/* Partners */}
+      <section id="partners" className="py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="max-w-2xl">
+            <div className="text-xs uppercase tracking-[0.22em] text-gold">Partners</div>
+            <h2 className="mt-4 font-serif text-4xl text-navy sm:text-5xl">{t.partnersTitle}</h2>
+            <p className="mt-5 text-base text-muted-foreground">{t.partnersSubtitle}</p>
+          </div>
+          <div className="mt-14 flex flex-wrap gap-6">
+            {partners.map((p) => (
+              <a
+                key={p.name}
+                href={p.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-2xl border border-border bg-background p-3 grayscale transition hover:border-gold hover:shadow-[var(--shadow-soft)] hover:grayscale-0"
+                aria-label={p.name}
+              >
+                <img src={assetUrl("/assets/acuven-log.jpeg")} alt={p.name} className="h-20 w-20 rounded-xl object-cover" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="bg-navy-deep py-24 text-primary-foreground">
         <div className="mx-auto max-w-7xl px-6">
@@ -311,6 +347,18 @@ function Landing() {
             <span>© {new Date().getFullYear()} T & A Cross-Border Accounting. {t.footerRights}</span>
           </div>
           <div className="uppercase tracking-[0.22em] text-gold/80">{t.footerTagline}</div>
+        </div>
+        <div className="mx-auto mt-6 flex max-w-7xl items-center justify-center gap-2 border-t border-white/10 px-6 pt-6 text-[11px]">
+          <span>{t.footerTechBy}</span>
+          <a
+            href="https://acuventech.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-primary-foreground/80 transition hover:text-gold"
+          >
+            <img src={assetUrl("/assets/acuven-log.jpeg")} alt="" className="h-7 w-7 rounded-md object-cover" />
+            Acuven Technology Sdn Bhd
+          </a>
         </div>
       </footer>
 
