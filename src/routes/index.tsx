@@ -4,6 +4,7 @@ import logoAsset from "@/assets/ta-logo.asset.json";
 import logoLightAsset from "@/assets/ta-logo-transparent.asset.json";
 import officeAsset from "@/assets/ta-office.asset.json";
 import { Mail, MapPin, MessageCircle, CircleCheck, Star, ArrowRight, Building2, Calculator, ShieldCheck, FileText, Briefcase, FileSearch, BadgeCheck, IdCard, Utensils, ChartColumn } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -299,34 +300,60 @@ function Landing() {
           </div>
           <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-3">
             {t.services.map(({ icon: Icon, t: title, items }, i) => (
-              <div key={title} className="group bg-background p-8 transition hover:bg-white">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-navy/5 text-navy transition group-hover:bg-navy group-hover:text-primary-foreground">
-                    <Icon className="h-5 w-5" />
+              <Dialog key={title}>
+                <DialogTrigger asChild>
+                  <button type="button" className="group w-full cursor-pointer bg-background p-8 text-left transition hover:bg-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-navy/5 text-navy transition group-hover:bg-navy group-hover:text-primary-foreground">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="font-serif text-2xl text-gold/70">{String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                    <div className="mt-6 flex items-center justify-between gap-4">
+                      <h3 className="font-serif text-xl text-navy">{title}</h3>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-gold transition group-hover:translate-x-1" />
+                    </div>
+                  </button>
+                </DialogTrigger>
+                <DialogContent aria-describedby={undefined} className="max-h-[85vh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl p-8">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-navy text-primary-foreground">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <DialogTitle className="font-serif text-2xl font-normal text-navy">{title}</DialogTitle>
                   </div>
-                  <span className="font-serif text-2xl text-gold/70">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <h3 className="mt-6 font-serif text-xl text-navy">{title}</h3>
-                <ServiceList items={items} />
-              </div>
+                  <ServiceList items={items} />
+                </DialogContent>
+              </Dialog>
             ))}
-            <div className="group bg-background p-8 transition hover:bg-white sm:col-span-2 lg:col-span-3">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-navy/5 text-navy transition group-hover:bg-navy group-hover:text-primary-foreground">
-                  <ChartColumn className="h-5 w-5" />
-                </div>
-                <h3 className="font-serif text-xl text-navy">{t.listed.t}</h3>
-                <span className="ml-auto font-serif text-2xl text-gold/70">10</span>
-              </div>
-              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {t.listed.groups.map((g) => (
-                  <div key={g.t}>
-                    <h4 className="text-sm font-medium text-navy">{g.t}</h4>
-                    <ServiceList items={g.items} />
+            <Dialog>
+              <DialogTrigger asChild>
+                <button type="button" className="group flex w-full cursor-pointer items-center gap-4 bg-background p-8 text-left transition hover:bg-white sm:col-span-2 lg:col-span-3">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-navy/5 text-navy transition group-hover:bg-navy group-hover:text-primary-foreground">
+                    <ChartColumn className="h-5 w-5" />
                   </div>
-                ))}
-              </div>
-            </div>
+                  <h3 className="font-serif text-xl text-navy">{t.listed.t}</h3>
+                  <span className="ml-auto font-serif text-2xl text-gold/70">10</span>
+                  <ArrowRight className="h-5 w-5 shrink-0 text-gold transition group-hover:translate-x-1" />
+                </button>
+              </DialogTrigger>
+              <DialogContent aria-describedby={undefined} className="max-h-[85vh] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto rounded-2xl p-8">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-navy text-primary-foreground">
+                    <ChartColumn className="h-5 w-5" />
+                  </div>
+                  <DialogTitle className="font-serif text-2xl font-normal text-navy">{t.listed.t}</DialogTitle>
+                </div>
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                  {t.listed.groups.map((g) => (
+                    <div key={g.t}>
+                      <h4 className="text-sm font-medium text-navy">{g.t}</h4>
+                      <ServiceList items={g.items} />
+                    </div>
+                  ))}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
